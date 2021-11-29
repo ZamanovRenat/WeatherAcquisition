@@ -7,27 +7,27 @@ namespace WeatherAcquisition.Interfaces.Base.Repositories
 {
     public interface IRepository<T> where T : IEntity
     {
-        Task<bool> ExistId(int Id);
+        Task<bool> ExistId(int Id, CancellationToken Cancel = default);
 
-        Task<bool> Exist(T item);
+        Task<bool> Exist(T item, CancellationToken Cancel = default);
 
-        Task<int> GetCount();
+        Task<int> GetCount(CancellationToken Cancel = default);
 
-        Task<IEnumerable<T>> GetAll();
+        Task<IEnumerable<T>> GetAll(CancellationToken Cancel = default);
 
-        Task<IEnumerable<T>> Get(int Skip, int Count);
+        Task<IEnumerable<T>> Get(int Skip, int Count, CancellationToken Cancel = default);
 
-        Task<IPage<T>> GetPage(int PageIndex, int PageSize);
+        Task<IPage<T>> GetPage(int PageIndex, int PageSize, CancellationToken Cancel = default);
 
-        Task<T> GetById(int Id);
+        Task<T> GetById(int Id, CancellationToken Cancel = default);
 
-        Task<T> Add(T item);
+        Task<T> Add(T item, CancellationToken Cancel = default);
 
-        Task<T> Update(T item);
+        Task<T> Update(T item, CancellationToken Cancel = default);
 
-        Task<T> Delete(T item);
+        Task<T> Delete(T item, CancellationToken Cancel = default);
 
-        Task<T> DeleteById(int Id);
+        Task<T> DeleteById(int Id, CancellationToken Cancel = default);
     }
 
     public interface IPage<out T>
