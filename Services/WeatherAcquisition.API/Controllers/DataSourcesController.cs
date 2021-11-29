@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WeatherAcquisition.DAL.Entities;
@@ -22,5 +23,14 @@ namespace WeatherAcquisition.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(bool))]
         public async Task<IActionResult> ExistId(int id) => await _repository.ExistId(id) ? Ok(true) : NotFound(false);
+        //Получение всех объектов
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAll() => Ok(await _repository.GetAll());
+        //Получение объектов с возможностью пропуска
+        [HttpGet("Items[[{Skip:int}:{Count:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<DataSource>>> Get(int Skip, int Count) =>
+            Ok(await _repository.Get(Skip, Count));
     }
 }
